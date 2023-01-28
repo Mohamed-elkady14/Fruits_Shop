@@ -1,0 +1,152 @@
+﻿@model IEnumerable<Fruits_Shop.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    SelectList categList = new SelectList(ViewBag.CategoryList, "ID", "Categ_Name","Categ_Image");
+
+}
+
+<div id="carousel">
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide vh-100  "
+        data-bs-ride="true"
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner h-100 w-100">
+          <div class="carousel-item active">
+            <img src="./images/bk5.jpg" class="d-block w-100" alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src="./images/bk3.jpg" class="d-block w-100" alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src="./images/bk4.jpg" class="d-block w-100" alt="..." />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden bg-dark">Next</span>
+        </button>
+      </div>
+    </div>
+   
+
+
+    <section class="product mb-5 ">
+        <h2 class="product-category text-success border-success ">Explore By category</h2>
+       
+        <button class="nxt-btn"> <img src="~/Images/arrow1.jpeg" width="50px"/></button>
+         <button class="pre-btn"> <img src="~/Images/arrow1.jpeg" width="50px"/></button>
+        <div class="product-container m-5">
+        @foreach (var item in ViewBag.CategoryList){      
+          <div class=" col-lg-3 col-md-6 text-center m-2 w-25">
+            <div class="card border-0 bg-light mb-2">
+              <div class="card-body">
+                <img src="~/Images/@item.Categ_Image" class="img-fluid"  alt="" />
+              </div>
+            </div>
+         <a asp-action="index" asp-controller="product" ><h6>@item.Categ_Name</h6></a>  
+          </div>
+            }
+        </div>
+    </section>
+
+
+
+   <p>
+    <a asp-action="new" asp-controller="product" class="btn btn-outline-dark m-5">Add Product</a>
+</p>
+    <div class="container-fluid">
+        <h2 class="product-category text-success border-success ">Top Sale</h2>
+        <section class="product1">
+        <div class="row  ">
+                    
+ @foreach (var item in Model) {
+  
+    <div class="prod ">
+            <input type="checkbox" id="_checkbox">
+                <label class="check"  for="_checkbox">
+                <div id="tick_mark"></div>
+                </label>
+                       
+                @if(@item.DisCount!=null){
+                        <span class="discount-tag">Discount @item.DisCount %</span>
+                    }
+                    else
+                    {
+                        <span class="discount-tag" hidden>@item.DisCount %</span>
+                    }
+                    <img src="~/Images/@item.Image" class="mb-3 mt-4" alt="" />
+        <div class="desc">
+        <h5>@item.Name</h5>
+                        @if (@item.DisCount != null)
+                        {
+                            <span class="actual-price">$@item.Price</span>
+                            <span class="price">$@(item.Price-(@item.Price/@item.DisCount))</span>
+                            
+                        }
+                        else
+                        {
+                            <span class="price">$@item.Price</span>
+                        }
+                    </div>
+                    <a asp-action="Edit" asp-controller="product" asp-route-Id="@item.ID" class="btn btn-outline-primary my-3 edit">Edit</a>
+                     <a asp-action="Delete" asp-controller="product" asp-route-Id="@item.ID" class="btn btn-outline-danger my-3  edit">Delete</a>
+        <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+    </div>
+   
+       
+
+  @*<div class="card col" style="width: 18rem">
+      <img src="./Images/@item.Image" class="card-img-top img-fluid" width="100px">
+      <div class="card-body">
+          <h5 class="card-title">@item.Name</h5>
+          <p class"card-text">@item.Price</p>
+          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+
+      </div>
+  </div>*@
+
+
+
+}
+   </div>
+   
+</section>
+</div>

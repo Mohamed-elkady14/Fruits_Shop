@@ -1,0 +1,43 @@
+﻿@model Fruits_Shop.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SaveEdit"  asp-controller="category" asp-route-id="@Model.ID" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID" hidden class="control-label"></label>
+                <input asp-for="ID" hidden class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categ_Name" class="control-label"></label>
+                <input asp-for="Categ_Name" class="form-control" />
+                <span asp-validation-for="Categ_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+              <label class=" control-label" asp-for="Categ_Image" >Select Image: </label>
+              <div class="col-md-5">
+              <label  class="file center-block"></label>
+                    <input type="file" asp-for="Categ_Image" class="mb-2">
+                    <span asp-validation-for="Categ_Image" class="file-custom"></span>
+              </div>
+             </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-success">Back to List</a>
+</div>
+

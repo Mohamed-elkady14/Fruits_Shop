@@ -1,0 +1,26 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<br />
+<hr />
+   <p>
+    <a asp-action="New" asp-controller="Category" class="btn btn-outline-dark m-5">Add Category</a>
+</p>
+<div class="container-fluid">
+    <div class="row">
+ @foreach (var item in Model){
+
+     <div class="card col-12 m-4 ms-5 " style="width:300px">
+  <img class="card-img-top h-100" src="~/Images/@item.Categ_Image" alt="Card image">
+  <div class="card-body">
+    <h4 class="card-title align-content-center">@item.Categ_Name</h4>
+    <a class="btn btn-primary" asp-action="Edit" asp-controller="category" asp-route-Id="@item.ID">Update</a>
+        <a  class="btn btn-primary" asp-action="Delete" asp-controller="category" asp-route-Id="@item.ID">Delete</a>
+
+  </div>
+</div>
+ }
+ </div>
+ </div>
